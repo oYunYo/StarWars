@@ -1,0 +1,34 @@
+<form #formPlanetValidation="ngForm" (ngSubmit)="updatePlanet()">
+
+  <div class="form-group">
+    <label>Nom de la planête de la planête</label>
+    <input type="text" class="form-control" required name="nom" #nom="ngModel"
+           [(ngModel)]="planetToUpdate.name">
+    <div *ngIf="!nom.valid" class="error">
+      Il y une erreur sur le champ nom
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Il y a de l'oxygéne ?</label>
+    <select required class="form-control"
+            [(ngModel)]="planetToUpdate.hasOxygen" name="oxygen">
+      <option *ngFor="let choice of yesNoItem" [ngValue]="choice.valeur">{{ choice.text }}</option>
+    </select>
+  </div>
+
+
+
+
+  <div class="form-group">
+    <label>Image de la planête</label>
+    <input type="text" class="form-control"
+           required name="image" #image="ngModel"
+           [(ngModel)]="planetToUpdate.image">
+    <div *ngIf="!image.valid" class="error">
+      Il y une erreur sur le champ image
+    </div>
+  </div>
+
+  <button [disabled]="!formPlanetValidation.valid" type="submit">Enregistrer la planête</button>
+</form>

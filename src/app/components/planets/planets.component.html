@@ -1,0 +1,24 @@
+<button [routerLink]="['/planets/add']" class="btn btn-success">Ajouter une planête</button>
+<table class="table table-dark">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Nom de la planet</th>
+    <th scope="col">Il y a de l'oxygen ? </th>
+    <th scope="col">Image</th>
+    <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let planet of planets">
+    <th scope="row">{{ planet.id }}</th>
+    <td>{{ planet.name }}</td>
+    <td>{{planet.hasOxygen ? 'Oui' : 'Non'}}</td>
+    <td><img src="{{ planet.image }}"></td>
+    <td>
+      <button class="btn btn-warning" (click)="deletePlanet(planet)">Supprimer</button>
+      <button class="btn btn-success" [routerLink]="['/planets/edit', planet.id]">Editer</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
