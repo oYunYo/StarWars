@@ -1,9 +1,9 @@
-<div id="formulaire" class="border-black mt-5 container">
+<div id="formulaire" class="mt-5 container">
   <h2>Ajouter une planète</h2>
   <form #formPlanetValidation="ngForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label>Id de la planète</label>
-      <input type="number" class="form-control" required name="id" #id="ngModel"
+      <input type="number" id="idTest" class="form-control" required name="id" #id="ngModel"
             [(ngModel)]="planetForm.id">
       <div *ngIf="!id.valid" class="error">
         <p class="text-warning">Erreur ce n'est pas un ID</p>
@@ -12,7 +12,7 @@
 
     <div class="form-group">
       <label>Nom de la planète</label>
-      <input type="text" class="form-control" required name="nom" #nom="ngModel"
+      <input type="text" id="nomTest" class="form-control" required name="nom" #nom="ngModel"
             [(ngModel)]="planetForm.name">
       <div *ngIf="!nom.valid" class="error">
         <p class="text-warning">Erreur ce n'est pas un nom</p>
@@ -21,7 +21,7 @@
 
     <div class="form-group">
       <label>Y a-t-il de l'oxygène ?</label>
-      <select required class="form-control"
+      <select required id="oxygenTest" class="form-control"
               [(ngModel)]="planetForm.hasOxygen" name="oxygen">
         <option *ngFor="let choice of yesNoItem" [ngValue]="choice.valeur" >{{ choice.text }}</option>
       </select>
@@ -29,7 +29,7 @@
 
     <div class="form-group">
       <label>Image de la planète</label>
-      <input type="text" class="form-control"
+      <input type="text" id="imgTest" class="form-control"
             required name="image" #image="ngModel"
             [(ngModel)]="planetForm.image">
       <div *ngIf="!image.valid" class="error">
@@ -37,6 +37,6 @@
       </div>
     </div>
 
-    <button [disabled]="!formPlanetValidation.valid" class="btn btn-success" type="submit">Enregistrer la planète</button>
+    <button [disabled]="!formPlanetValidation.valid" id="submitFormPlanet" class="btn btn-success" type="submit">Enregistrer la planète</button>
   </form>
 </div>

@@ -10,14 +10,14 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let planet of planets">
+  <tr class="linePlanet" *ngFor="let planet of planets">
     <th scope="row">{{ planet.id }}</th>
     <td>{{ planet.name }}</td>
     <td>{{planet.hasOxygen ? 'Oui' : 'Non'}}</td>
     <td><img src="{{ planet.image }}"></td>
     <td>
-    <a (click)="deletePlanet(planet.id)">
-      <img  src="/assets/img/delete.png">
+    <a class="testDelete" (click)="deletePlanet(planet.id)">
+      <img src="/assets/img/delete.png">
     </a>
     <a [routerLink]="['/planets/edit', planet.id]">
       <img  src="/assets/img/edit.png">
@@ -29,5 +29,5 @@
   </tbody>
 </table>
 
-<button type="button" id="bouton" class="btn btn-lg btn-lg" [routerLink]="['/planets/add']">Ajouter une planète</button>
+<button type="button" id="addPlanetLink" class="btn btn-lg btn-lg" [routerLink]="['/planets/add']">Ajouter une planète</button>
 </div>

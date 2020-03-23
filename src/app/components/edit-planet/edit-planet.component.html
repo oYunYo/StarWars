@@ -1,3 +1,5 @@
+<div id="formulaireEdit" class="mt-5 container">
+  <h2>Modifier la planète</h2>
 <form #formPlanetValidation="ngForm" (ngSubmit)="updatePlanet()">
 
   <div class="form-group">
@@ -10,18 +12,15 @@
   </div>
 
   <div class="form-group">
-    <label>Il y a de l'oxygéne ?</label>
+    <label>Il y a de l'oxygène ?</label>
     <select required class="form-control"
             [(ngModel)]="planetToUpdate.hasOxygen" name="oxygen">
       <option *ngFor="let choice of yesNoItem" [ngValue]="choice.valeur">{{ choice.text }}</option>
     </select>
   </div>
 
-
-
-
   <div class="form-group">
-    <label>Image de la planête</label>
+    <label>Image de la planète</label>
     <input type="text" class="form-control"
            required name="image" #image="ngModel"
            [(ngModel)]="planetToUpdate.image">
@@ -30,5 +29,6 @@
     </div>
   </div>
 
-  <button [disabled]="!formPlanetValidation.valid" type="submit">Enregistrer la planête</button>
+  <button [disabled]="!formPlanetValidation.valid" class="btn btn-success" type="submit">Enregistrer la planète</button>
 </form>
+</div>
