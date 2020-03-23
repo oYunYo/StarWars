@@ -1,0 +1,36 @@
+{
+  "starship": [
+    {
+      "id": 1,
+      "name": "Faucon millenium",
+      "model": "YT-1300",
+      "costInCredits": 12000000
+    },
+    {
+      "id": 2,
+      "name": "Interceptor TIE",
+      "model": "TIE",
+      "costInCredits": 6000000
+    }
+  ],
+  "planet": [
+    {
+      "id": 1,
+      "name": "Terre",
+      "hasOxygen": true,
+      "image": "/assets/img/terre.png"
+    },
+    {
+      "id": 2,
+      "name": "Neptune",
+      "hasOxygen": false,
+      "image": "/assets/img/neptune.png"
+    },
+    {
+      "id": 3,
+      "name": "Jupiter",
+      "hasOxygen": false,
+      "image": "/assets/img/jupiter.png"
+    }
+  ]
+}

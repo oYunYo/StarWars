@@ -1,3 +1,16 @@
 img {
-  max-width: 80px;
+  height: 200px;
+}
+
+th, td {
+  color: white;
+}
+
+#bouton {
+  background-color: #ffe919;
+  box-shadow: 1px 1px 12px #ffe919;
+}
+
+.actions {
+  height: 100px;
 }

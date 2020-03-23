@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Planet} from '../../models/planet';
-import {PlanetService} from '../../services/planet.service';
+import {PlanetsService} from '../../services/planet.service';
 
 @Component({
   selector: 'app-edit-planet',
@@ -10,19 +10,31 @@ import {PlanetService} from '../../services/planet.service';
 })
 export class EditPlanetComponent implements OnInit {
   planetToUpdate: Planet;
+  isLoading:boolean;
   yesNoItem = [{text: 'Oui', valeur: true}, {text: 'Non', valeur: false}];
   constructor(private activatedRoute: ActivatedRoute,
-              private planetService: PlanetService,
+              private planetService: PlanetsService,
               private router: Router) { }
 
   ngOnInit() {
-    const id = +this.activatedRoute.snapshot.paramMap.get('id');
-    this.planetToUpdate = this.planetService.getPlanetById(id);
-    console.log(this.planetToUpdate);
+    this.isLoading = true;     
+    this.planetService.getOnePlanet(+this.activatedRoute.snapshot.paramMap.get('id')).subscribe((data: Planet) => {         
+      this.planetToUpdate = data;         
+      this.isLoading = false;     
+    }); 
   }
 
   updatePlanet() {
-    this.planetService.updatePlanet(this.planetToUpdate);
-    this.router.navigate(['/planets']);
+    this.planetService.updatePlanet(this.planetToUpdate).subscribe(data => {
+      this.router.navigate(['/planets']);
+    });
+ 
   }
+
+  onSubmit() {
+    this.planetService.updatePlanet(this.planetToUpdate).subscribe(then => {
+      this.router.navigate(['/planets']);
+    });
+
+}
 }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Starwars</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -17,3 +17,25 @@
     </ul>
   </div>
 </nav>
+ -->
+<div id="jaune" class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-#ffe919 container">
+    <a class="navbar-brand" routerLink="home" routerLinkActive="active"><img src="assets/img/starwarslogo.svg" class="logo img-fluid" alt="logo de Star Wars"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/']" [routerLinkActive]="'active'">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/planets']" [routerLinkActive]="'active'">Planets</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="vehicles" routerLinkActive="active">Véhicules</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {PlanetService} from '../../services/planet.service';
+import {PlanetsService} from '../../services/planet.service';
 import {Planet} from '../../models/planet';
 import {Router} from '@angular/router';
 
@@ -10,16 +10,24 @@ import {Router} from '@angular/router';
 })
 export class PlanetsComponent implements OnInit {
   planets: Planet[];
-  constructor(private planetService: PlanetService) { }
+  constructor(private planetsService: PlanetsService) { }
 
+  isLoading: boolean;          
   ngOnInit() {
-    this.planets = this.planetService.getPlanets();
-    console.log(this.planets);
+    this.isLoading = true;
+    return this.planetsService.getPlanets().subscribe((data: Planet[]) => {
+      this.planets = data; 
+      this.isLoading = false; 
+  });
+}
+  
+  deletePlanet(id: number) {   
+    this.isLoading = true;   
+    this.planetsService.deletePlanet(id).subscribe(then => {       
+      this.planetsService.getPlanets().subscribe((data: Planet[]) => {           
+        this.planets = data;           
+        this.isLoading = false;       
+      });   
+    }); 
   }
-
-  deletePlanet(planet: Planet) {
-    this.planetService.delete(planet);
-    this.planets = this.planetService.getPlanets();
-  }
-
 }

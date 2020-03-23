@@ -1,37 +1,94 @@
 import { Injectable } from '@angular/core';
 import {Planet} from '../models/planet';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { throwError, Observable } from 'rxjs';
+import { catchError, retry } from 'rxjs/internal/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlanetService {
-  planets: Planet[];
+export class PlanetsService {
+  getPlanetByiD(id: number) {
+    throw new Error("Method not implemented.");
+  }   
+  planets: Planet[];   
+  apiURL = 'http://localhost:3000/planet';   
+  httpOptions = {       
+    headers: new HttpHeaders({             
+      'Content-Type': 'application/json'         
+    })     
+  };   
+  
+  constructor(private http: HttpClient) {     
+    this.planets = [];   
+  } 
+  
+  handleError(error) {     
+    let errorMessage = '';     
+    if ( error.error instanceof ErrorEvent ) {         
+      // Get client-side error         
+      errorMessage = error.error.message;     
+    } else {         
+      // Get server-side error         
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;     
+    }     
+    window.alert(errorMessage);     
+    return throwError(errorMessage); 
+  } 
 
-  constructor() {
-    this.planets = [
-      new Planet(1, 'Pluton', false,
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Nh-pluto-in-true-color_2x_JPEG.jpg/290px-Nh-pluto-in-true-color_2x_JPEG.jpg'),
-      new Planet(2, 'terre', true, 'https://cdn.pixabay.com/photo/2011/12/13/14/31/earth-11015_960_720.jpg')
-    ];
-  }
-  getPlanets(): Planet[] {
-    return this.planets;
-  }
-  getPlanetById(id: number): Planet {
-    return this.planets.filter(planet =>
-      planet.id === id)[0];
+
+
+  getPlanets(): Observable<Planet[]> {      
+    return this.http.get<Planet[]>(this.apiURL)          
+      .pipe(             
+          retry(1),              
+          catchError(this.handleError)          
+      ); 
   }
 
-  addPlanet(planet: Planet): void {
-    this.planets.push(planet);
+  getOnePlanet(id: number): Observable<Planet> {     
+    return this.http.get<Planet>(this.apiURL + '/' + id)         
+      .pipe(             
+        retry(1),             
+        catchError(this.handleError)         
+      ); 
   }
 
-  delete(planetToDelete: Planet) {
-    this.planets = this.planets.filter(planet => planet !== planetToDelete);
+  deletePlanet(id: number): Observable<Planet> {     
+    return this.http.delete<Planet>(this.apiURL + '/' + id)         
+    .pipe(             
+      retry(1),             
+      catchError(this.handleError)         
+    ); 
   }
 
-  updatePlanet(planetToUpdate: Planet) {
-    this.planets.filter(planet =>
-      planet.id === planetToUpdate.id)[0] = planetToUpdate;
-  }
+addPlanet(planet:Planet): Observable<Planet> {
+  return this.http.post<Planet>(this.apiURL, planet, this.httpOptions).pipe(
+    catchError(this.handleError)
+  );
+}
+
+updatePlanet(planet:Planet): Observable<Planet> {
+  return this.http.put<Planet>(this.apiURL + '/' + planet.id , planet, this.httpOptions).pipe(
+    catchError(this.handleError)
+  );
+}
+
+//   getPlanetById(id: number): Planet {
+//     return this.planets.filter(planet =>
+//       planet.id === id)[0];
+//   }
+
+//   addPlanet(planet: Planet): void {
+//     this.planets.push(planet);
+//   }
+
+//   delete(planetToDelete: Planet) {
+//     this.planets = this.planets.filter(planet => planet !== planetToDelete);
+//   }
+
+//   updatePlanet(planetToUpdate: Planet) {
+//     this.planets.filter(planet =>
+//       planet.id === planetToUpdate.id)[0] = planetToUpdate;
+//   }
 }

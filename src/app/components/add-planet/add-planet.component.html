@@ -1,39 +1,42 @@
-<form #formPlanetValidation="ngForm" (ngSubmit)="addPlanet()">
-  <div class="form-group">
-    <label>Id de la planête</label>
-    <input type="number" class="form-control" required name="id" #id="ngModel"
-           [(ngModel)]="planetForm.id">
-    <div *ngIf="!id.valid" class="error">
-        Il y une erreur sur le champ ID
+<div id="formulaire" class="border-black mt-5 container">
+  <h2>Ajouter une planète</h2>
+  <form #formPlanetValidation="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Id de la planète</label>
+      <input type="number" class="form-control" required name="id" #id="ngModel"
+            [(ngModel)]="planetForm.id">
+      <div *ngIf="!id.valid" class="error">
+        <p class="text-warning">Erreur ce n'est pas un ID</p>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label>Nom de la planête de la planête</label>
-    <input type="text" class="form-control" required name="nom" #nom="ngModel"
-           [(ngModel)]="planetForm.name">
-    <div *ngIf="!nom.valid" class="error">
-      Il y une erreur sur le champ nom
+    <div class="form-group">
+      <label>Nom de la planète</label>
+      <input type="text" class="form-control" required name="nom" #nom="ngModel"
+            [(ngModel)]="planetForm.name">
+      <div *ngIf="!nom.valid" class="error">
+        <p class="text-warning">Erreur ce n'est pas un nom</p>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label>Il y a de l'oxygéne ?</label>
-    <select required class="form-control"
-            [(ngModel)]="planetForm.hasOxygen" name="oxygen">
-      <option *ngFor="let choice of yesNoItem" [ngValue]="choice.valeur" >{{ choice.text }}</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label>Image de la planête</label>
-    <input type="text" class="form-control"
-           required name="image" #image="ngModel"
-           [(ngModel)]="planetForm.image">
-    <div *ngIf="!image.valid" class="error">
-      Il y une erreur sur le champ image
+    <div class="form-group">
+      <label>Y a-t-il de l'oxygène ?</label>
+      <select required class="form-control"
+              [(ngModel)]="planetForm.hasOxygen" name="oxygen">
+        <option *ngFor="let choice of yesNoItem" [ngValue]="choice.valeur" >{{ choice.text }}</option>
+      </select>
     </div>
-  </div>
 
-  <button [disabled]="!formPlanetValidation.valid" type="submit">Enregistrer la planête</button>
-</form>
+    <div class="form-group">
+      <label>Image de la planète</label>
+      <input type="text" class="form-control"
+            required name="image" #image="ngModel"
+            [(ngModel)]="planetForm.image">
+      <div *ngIf="!image.valid" class="error">
+        <p class="text-warning">Erreur ce n'est pas une image</p>
+      </div>
+    </div>
+
+    <button [disabled]="!formPlanetValidation.valid" class="btn btn-success" type="submit">Enregistrer la planète</button>
+  </form>
+</div>

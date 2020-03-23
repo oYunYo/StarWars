@@ -11,3 +11,5 @@ export class Planet {
     this.image = image;
   }
 }
+
+

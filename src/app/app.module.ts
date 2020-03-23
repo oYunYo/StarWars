@@ -11,6 +11,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddPlanetComponent } from './components/add-planet/add-planet.component';
 import {FormsModule} from '@angular/forms';
 import { EditPlanetComponent } from './components/edit-planet/edit-planet.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PlanetDetailComponent } from './components/planet-detail/planet-detail.component'; 
 
 @NgModule({
   declarations: [
@@ -20,13 +22,15 @@ import { EditPlanetComponent } from './components/edit-planet/edit-planet.compon
     VehiculsComponent,
     DashboardComponent,
     AddPlanetComponent,
-    EditPlanetComponent
+    EditPlanetComponent,
+    PlanetDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
